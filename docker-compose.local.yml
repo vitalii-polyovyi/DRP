@@ -1,0 +1,36 @@
+version: '3.1'
+services:
+  logger:
+    extends:
+      file: logger/docker-compose.yml
+      service: logger
+    networks:
+      - drpnetwork
+    depends_on:
+      - loggerdb
+  loggerdb:
+    extends:
+      file: mongodb/docker-compose.yml
+      service: mongo
+    networks:
+      - drpnetwork
+  appfs:
+    extends:
+      file: gridfs/docker-compose.yml
+      service: mongo
+    networks:
+      - drpnetwork
+  appdb:
+    extends:
+      file: postgres/docker-compose.yml
+      service: db
+    networks:
+      - drpnetwork
+  appqueue:
+    extends:
+      file: rabbitmq/docker-compose.yml
+      service: rabbitmq
+    networks:
+      - drpnetwork
+networks:
+  drpnetwork:

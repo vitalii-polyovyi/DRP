@@ -1,0 +1,16 @@
+version: '3.1'
+services:
+  logger:
+    container_name: go-logger
+    restart: always
+    build: .
+    env_file: .env
+    environment:
+      - APP_PORT=${APP_PORT}
+      - MONGO_HOST=${MONGO_HOST}
+      - MONGO_PORT=${MONGO_PORT}
+      - MONGO_DATABASE=${MONGO_DATABASE}
+      - MONGO_USER=${MONGO_USER}
+      - MONGO_PASSWORD=${MONGO_PASSWORD}
+    ports:
+      - ${APP_PORT}:${APP_PORT}
